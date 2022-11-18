@@ -1,24 +1,25 @@
 import random
 import sys
 
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QWidget
+
+from UI import Ui_Form
 
 SIZE_SCREEN = [640, 490]
 
 
-class Example(QWidget):
+class Example(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi("UI.ui", self)
+        self.setupUi(self)
         self.flag = False
         self.go_btn.clicked.connect(self.draw)
         self.coords = []
-        self.setWindowTitle('Git и желтые окружности')
+        self.setWindowTitle('Git и случайные окружности')
 
     def draw(self):
-        self.color = (255, 255, 0)
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         self.size = random.randint(10, 150)
         self.flag = True
         self.update()
